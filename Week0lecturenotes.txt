@@ -1,0 +1,133 @@
+#Pong-0 Day 0 update
+    - love.load()
+        ~ used for starting the game state as program executes.
+
+    -love.update(dt)
+        ~ changed each frame by love. dt (Delta Time) will be elapsed time ins eacdons since last frame 
+            and we can use this to scale any changes in our game for even behavior across frame rates.
+
+    -love.draw()
+        ~ call each frame by love after update for drawing thigns to the screen once they have changed.
+
+    -love.graphics.printf(text, x, y, [width], [align])
+        ~Versatile print function that can align text left right or center of screen
+
+    -love.window.setMode(width, height, params)
+            ~used to initalize the window dimensions and set parameters like vertical sync (vsync) whether 
+                we are fullscreen or not, and whether the window si resizable after startup. Wont be using past this example in favor of the push
+                virtual resolution libary which has its own method similar, but useful to know for the future.
+
+
+
+#Pong-1 low-res update
+    - love.graphics.setDefaultFilter(min, mag)
+            ~ Sets the textuire scaling filter when minimizing and magnifying textures and fonts. Default is bilinear, which causes blurtriness 
+                and for our case will typically want nearest neighbot filtering which results in perfect pixel upscaling and downscaling, 
+                similating a retro feel.
+
+    - love.keypressed(key)
+            ~ callback function that exectures whenever we press a key, assuming we've implemented this in oiur main.lua, 
+                same as love.load(), love.update(dt), and love.draw()
+
+    - love.event.quit()
+            ~ simple function to terminate the application'
+                
+
+
+
+#Pong-2 rectangle update
+    - love.graphics.newFont(path, size)
+        ~loads a font file into memory at specific path, setting it to a specific size, and storing it in 
+            an object we can use to globally change the currently active font that Love is using to render text
+
+    - love.graphics.setFont(font)
+        ~ Sets love currently active font (of which can only be one at a time), to the new passed in font 
+            object that we can create using love.graphics.newFont.
+
+    love.graphics.clear(r, g, b,  a)
+        ~Wipres the entire screen with a color defined by RGBA set. Each ranges from 0-255
+
+    love.graphics.rectangle
+
+
+
+#Pong-3 Paddle Update
+    - love.keyboard.isDown(key)
+        ~returns true or false depending on if the specified key is pressed. Differs from love.keypressed(key)
+             in that this can be called arbitrarily and will continue to return true if the key is presed down whereas 
+             love.keypressed(key) will only fire once every time pressed down. However since we want to move the paddles 
+             up and down by holding keys, we need a function to test for longer inputs. 
+
+
+
+#Pong-4 Ball Update
+    -math.randomseed(num)
+        ~ "seeds" the random number generatior used by Lua (math.random) with some value such that its randomness is 
+        dependent on that supplied value, allowing us to pass in different numberss each playthrough to guarantee differences 
+        across the program executions (or uniformity if we want consistent behavior for testing).
+
+    -os.time()
+        ~Lua function that returns in seconds the time since 00:00:00 UTC Jan 1 1970, known as Unix epoch time
+    
+    -math.random(min, max)
+        ~Returns a random number dependent on the seeded random number generator, between set min and max, inclusive
+
+    -math.min(num1, num2)
+        ~ returns then lesser of two numbers passed in
+
+    -math.max(num1, num2)
+        ~ returns the greater of the two numbers passed in.
+
+
+
+#Pong-5  The Class update
+    - Introduction on classes in seperate files
+
+
+
+#Pong-6 The FPS update
+    - love.window.setTitle(title)
+        ~ simply sets the title of our application window, adding a slight level of polish.
+
+    - love.timer.getFPS()
+        ~ returns the current Frames per second of our appplication, making it easy to monitor when printed.
+
+
+
+#Pong-7 The collision update
+    - We test for any collision with
+            if rect1.x IS NOT > rect2.x + rect2.width and rect1.x + rect1.width is not < rect2.x AND rect1.y + rect1.height IS NOT < rect2.y: 
+                Collision is true
+            else
+                collision is false
+
+    
+    
+#Pong-8 Score update
+
+
+
+#Pong-9 Serve Update
+
+
+#Pont-10 Victory Update
+
+
+#Pong-11 Audio update
+    -love.audio.newSource(path, [type])
+        ~Creates love audio object that can play back at any point. Can also be given a type of "stream" or "static".
+                streamed assets will be streamed from disk as needed whereas
+                Static assets will be preserved in memory. Larger sound effects and music tracks, streaming is more memory effective
+                in this example the assets are static because they are so small.
+        ~Sound effects made at http://www.bfxr.net/
+
+
+
+#Pong-12 Resize update
+    - love.resize(width, height)
+        ~Called by love every time we resize the app. Logic should go in here if anything in the game (like UI) is sized 
+            dynamicalled based on window size.
+                push:resize() needs to be called here for our use case so taht it can dynamically rescale its internal canvas to fit the new window 
+                dimensions
+
+
